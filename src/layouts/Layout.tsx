@@ -1,15 +1,15 @@
 import React from "react";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <div className="h-screen flex flex-col justify-between">
-        <Header></Header>
-        <main>{children}</main>
-        <Footer></Footer>
-      </div>
-    </>
+    <div className="h-screen flex flex-col justify-between">
+      <Header></Header>
+      <main className="flex-1 bg-gray-200">
+        {children}
+      </main>
+      <Footer></Footer>
+    </div>
   );
 }

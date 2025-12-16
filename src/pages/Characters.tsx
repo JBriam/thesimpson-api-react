@@ -1,9 +1,12 @@
+import { Title } from "@/components/ui/Title";
+
 export function Characters() {
   return (
-    <>
-      <h1 className="text-4xl font-bold text-center mt-10">
-        Bienvenido a la página de personajes
-      </h1>
-    </>
+    <div>
+      <Title
+        titulo="Personajes de Springfield"
+        subtitulo="Explora el elenco completo de tu serie favorita"
+      />
+    </div>
   );
 }
