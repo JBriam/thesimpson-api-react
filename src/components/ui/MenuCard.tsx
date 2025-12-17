@@ -31,7 +31,7 @@ export function MenuCard({
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform duration-200"
+            className="w-6 h-6 ml-1 group-hover:translate-x-1 transition-transform duration-200"
           >
             <path
               strokeLinecap="round"

@@ -3,17 +3,21 @@ import { LocationsApi } from "@/apis/LocationsApi";
 import { LocationsCard } from "@/components/ui/LocationsCard";
 import type { Location } from "@/interfaces/Location";
 import { useState, useEffect } from "react";
+import { Pagination } from "@/components/ui/Pagination";
 
 export function Locations() {
   const [ubicaciones, setUbicaciones] = useState<Location[]>([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [totalPaginas, setTotalPaginas] = useState(1);
 
   // Fetch characters data from the API
   useEffect(() => {
-    LocationsApi.fetchLocations()
+    LocationsApi.fetchLocations(paginaActual)
       .then((data) => {
         setUbicaciones(data.results);
+        setTotalPaginas(data.pages);
         setCargando(false);
       })
       .catch((error) => {
@@ -21,7 +25,11 @@ export function Locations() {
         setCargando(false);
         console.error(error);
       });
-  }, []);
+  }, [paginaActual]);
+
+  const handlePageChange = (nuevaPagina: number) => {
+    setPaginaActual(nuevaPagina);
+  };
 
   if (cargando) {
     return (
@@ -59,6 +67,11 @@ export function Locations() {
         titulo="Explora los rincones de Springfield"
         subtitulo="Descubre dónde ocurren las historias de tus personajes favoritos."
       />
+      <Pagination
+        currentPage={paginaActual}
+        totalPages={totalPaginas}
+        onPageChange={handlePageChange}
+      />
       <div className="grid grid-cols-3 gap-8">
         {ubicaciones.map((ubicacion) => (
           <LocationsCard
@@ -68,10 +81,17 @@ export function Locations() {
             name={ubicacion.name}
             town={ubicacion.town}
             use={ubicacion.use}
-            link={`/locations/${ubicacion.name.toLowerCase().replace(/ /g, "-")}`}
+            link={`/locations/${ubicacion.name
+              .toLowerCase()
+              .replace(/ /g, "-")}`}
           />
         ))}
       </div>
+      <Pagination
+        currentPage={paginaActual}
+        totalPages={totalPaginas}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

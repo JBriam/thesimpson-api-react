@@ -37,7 +37,9 @@ export function CharactersCard({
           <div className="flex flex-col gap-4 text-right text-gray-900 font-semibold text-sm flex-1">
             <p>
               {!birthdate ? (
-                <span className="bg-gray-200 text-gray-400 rounded-lg px-2">Desconocida</span>
+                <span className="bg-gray-200 text-gray-400 rounded-lg px-2">
+                  Desconocida
+                </span>
               ) : (
                 <span className="bg-gray-200 rounded-lg px-2">{birthdate}</span>
               )}

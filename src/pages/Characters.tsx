@@ -3,25 +3,35 @@ import { CharactersCard } from "@/components/ui/CharactersCard";
 import { Title } from "@/components/ui/Title";
 import { useState, useEffect } from "react";
 import type { Character } from "@/interfaces/Character";
+import { Pagination } from "@/components/ui/Pagination";
 
 export function Characters() {
   const [personajes, setPersonajes] = useState<Character[]>([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [totalPaginas, setTotalPaginas] = useState(1);
 
   // Fetch characters data from the API
   useEffect(() => {
-    CharactersApi.fetchCharacters()
+    CharactersApi.fetchCharacters(paginaActual)
       .then((data) => {
         setPersonajes(data.results);
+        setTotalPaginas(data.pages);
         setCargando(false);
+        // Hacer scroll hacia arriba cuando cambia la página
+        window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch((error) => {
         setError(error.message);
         setCargando(false);
         console.error(error);
       });
-  }, []);
+  }, [paginaActual]);
+
+  const handlePageChange = (nuevaPagina: number) => {
+    setPaginaActual(nuevaPagina);
+  };
 
   if (cargando) {
     return (
@@ -45,7 +55,9 @@ export function Characters() {
           subtitulo="Explora el elenco completo de tu serie favorita"
         />
         <div className="min-h-50 flex items-center justify-center">
-          <p className="text-center text-xl text-red-600 mt-8">Error: {error}</p>
+          <p className="text-center text-xl text-red-600 mt-8">
+            Error: {error}
+          </p>
         </div>
       </div>
     );
@@ -56,6 +68,11 @@ export function Characters() {
       <Title
         titulo="Personajes de Springfield"
         subtitulo="Explora el elenco completo de tu serie favorita"
+      />
+      <Pagination
+        currentPage={paginaActual}
+        totalPages={totalPaginas}
+        onPageChange={handlePageChange}
       />
       <div className="grid grid-cols-4 gap-8">
         {personajes.map((personaje) => (
@@ -73,6 +90,11 @@ export function Characters() {
           />
         ))}
       </div>
+      <Pagination
+        currentPage={paginaActual}
+        totalPages={totalPaginas}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 export const EpisodesApi = {
-    fetchEpisodes: async () => {
-        const response = await fetch('https://thesimpsonsapi.com/api/episodes');
+    fetchEpisodes: async (page : number = 1) => {
+        const response = await fetch(`https://thesimpsonsapi.com/api/episodes?page=${page}`);
         if (!response.ok) {
             throw new Error('Se ha producido un error al obtener los episodios');
         }
