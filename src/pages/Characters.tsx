@@ -84,9 +84,7 @@ export function Characters() {
             birthdate={personaje.birthdate}
             gender={personaje.gender}
             status={personaje.status}
-            link={`/characters/${personaje.name
-              .toLowerCase()
-              .replace(/ /g, "-")}`}
+            link={`/characters/${personaje.id}`}
           />
         ))}
       </div>

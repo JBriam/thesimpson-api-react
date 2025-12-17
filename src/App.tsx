@@ -4,6 +4,7 @@ import { Home } from "./pages/Home";
 import { Characters } from "./pages/Characters";
 import { Episodes } from "./pages/Episodes";
 import { Locations } from "./pages/Locations";
+import { PageNotFound } from "./pages/PageNotFound";
 
 function App() {
   // APIs:
@@ -20,6 +21,7 @@ function App() {
             <Route path="/characters" element={<Characters />} />
             <Route path="/episodes" element={<Episodes />} />
             <Route path="/locations" element={<Locations />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Layout>
       </BrowserRouter>
