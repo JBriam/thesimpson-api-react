@@ -19,7 +19,7 @@ export function MenuCard({
     <article className="rounded-lg flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden bg-white">
       <img src={imagenSrc} alt={alt} className="h-60 w-full object-cover" />
       <div className="p-6 flex flex-col flex-1">
-        <h3 className="text-gray-900 font-bold text-xl">{title}</h3>
+        <h3 className="text-gray-900 font-bold text-2xl">{title}</h3>
         <p className="text-gray-500 text-md mt-4 flex-1">{description}</p>
         <a
           href={link}
