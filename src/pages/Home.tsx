@@ -3,18 +3,18 @@ import { Title } from "@/components/ui/Title";
 
 export function Home() {
   return (
-    <div className="flex flex-col gap-12 mb-12">
+    <div className="flex flex-col gap-8 md:gap-12 mb-12 items-center">
       {/* Banner a ancho completo */}
       <img
         src="banner-simpson.jpeg"
         alt="Banner de Springfield"
-        className="w-full h-auto mb-8 object-cover"
+        className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
       />
 
       {/* Contenido con ancho limitado */}
-      <div className="max-w-7xl mx-auto p-6 mb-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 md:mt-6">
         <Title titulo="Explora Springfield" subtitulo="" />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           <MenuCard
             imagenSrc="personajes.webp"
             alt="Personajes de Los Simpson"
@@ -43,20 +43,20 @@ export function Home() {
       </div>
 
       {/* Tarjeta del creador */}
-      <div className="max-w-4xl mx-auto mb-8 flex shadow-lg rounded-lg bg-white overflow-hidden">
+      <div className="bg-white mx-4 sm:mx-6 lg:mx-auto max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 shadow-lg rounded-lg overflow-hidden">
         <img
           src="matt-groening-png.webp"
           alt="Creador de Los Simpson"
-          className="w-64 h-auto object-cover p-12 bg-gray-400 border-amber-400 border-8"
+          className="w-full h-64 md:h-auto object-contain p-6 md:p-12 bg-gray-400 border-amber-400 border-4 md:border-8"
         />
-        <div className="flex flex-col p-8 justify-center gap-4 flex-1">
-          <h4 className="text-sm font-semibold text-yellow-400 flex items-center">
+        <div className="flex flex-col p-6 md:p-8 justify-center gap-3 md:gap-4">
+          <h4 className="text-xs md:text-sm font-semibold text-yellow-400 flex items-center">
             <svg
               fill="currentColor"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="w-6 h-6 mr-2"
+              className="w-5 h-5 md:w-6 md:h-6 mr-2"
             >
               <path
                 strokeLinecap="round"
@@ -66,8 +66,8 @@ export function Home() {
             </svg>
             CURIOSIDAD
           </h4>
-          <h1 className="text-gray-900 font-bold text-2xl">Matt Groening</h1>
-          <p className="text-gray-500">
+          <h1 className="text-gray-900 font-bold text-xl md:text-2xl">Matt Groening</h1>
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed">
             Matt Groening creó a la familia Simpson en el vestíbulo de la
             oficina de James L. Brooks. Llamó a los personajes como los miembros
             de su propia familia, sustituyendo su propio nombre por Bart para
