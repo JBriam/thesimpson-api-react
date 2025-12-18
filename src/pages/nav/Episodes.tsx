@@ -75,17 +75,7 @@ export function Episodes() {
       />
       <div className="grid grid-cols-3 gap-8">
         {episodios.map((episodio) => (
-          <EpisodesCard
-            key={episodio.id}
-            image_path={`https://cdn.thesimpsonsapi.com/500${episodio.image_path}`}
-            alt={episodio.name}
-            name={episodio.name}
-            season={episodio.season}
-            episode_number={episodio.episode_number}
-            airdate={episodio.airdate}
-            synopsis={episodio.synopsis}
-            link={`/episodes/${episodio.name.toLowerCase().replace(/ /g, "-")}`}
-          />
+          <EpisodesCard key={episodio.id} episodio={episodio} />
         ))}
       </div>
       <Pagination

@@ -1,10 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/layouts/Layout";
-import { Home } from "./pages/Home";
-import { Characters } from "./pages/Characters";
-import { Episodes } from "./pages/Episodes";
-import { Locations } from "./pages/Locations";
-import { PageNotFound } from "./pages/PageNotFound";
+import { Home } from "@/pages/Home";
+import { lazy, Suspense } from "react";
+
+// Lazy loading de componentes de páginas
+const Characters = lazy(() => import("@/pages/nav/Characters").then(module => ({ default: module.Characters })));
+const Episodes = lazy(() => import("@/pages/nav/Episodes").then(module => ({ default: module.Episodes })));
+const Locations = lazy(() => import("@/pages/nav/Locations").then(module => ({ default: module.Locations })));
+const CharacterDetails = lazy(() => import("@/pages/details/CharacterDetails").then(module => ({ default: module.CharacterDetails })));
+const EpisodeDetails = lazy(() => import("@/pages/details/EpisodeDetails").then(module => ({ default: module.EpisodeDetails })));
+const LocationDetails = lazy(() => import("@/pages/details/LocationDetails").then(module => ({ default: module.LocationDetails })));
+const PageNotFound = lazy(() => import("@/pages/PageNotFound").then(module => ({ default: module.PageNotFound })));
+
+// Componente de carga
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <span className="w-12 h-12 rounded-[50%] inline-block border-t-[3px] border-solid border-transparent border-t-yellow-500 animate-spin"></span>
+  </div>
+);
 
 function App() {
   // APIs:
@@ -16,13 +29,18 @@ function App() {
     <>
       <BrowserRouter>
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/characters" element={<Characters />} />
-            <Route path="/episodes" element={<Episodes />} />
-            <Route path="/locations" element={<Locations />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/characters" element={<Characters />} />
+              <Route path="/characters/:id" element={<CharacterDetails />} />
+              <Route path="/episodes" element={<Episodes />} />
+              <Route path="/episodes/:id" element={<EpisodeDetails />} />
+              <Route path="/locations" element={<Locations />} />
+              <Route path="/locations/:id" element={<LocationDetails />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
         </Layout>
       </BrowserRouter>
     </>

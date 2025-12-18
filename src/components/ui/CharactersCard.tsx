@@ -1,33 +1,22 @@
+import type { Character } from "@/interfaces/Character";
+
 interface CharactersCardProps {
-  portrait_path: string;
-  alt: string;
-  name: string;
-  birthdate: string;
-  gender: string;
-  status: string;
-  link: string;
+  personaje: Character;
 }
 
-export function CharactersCard({
-  portrait_path,
-  alt,
-  name,
-  birthdate,
-  gender,
-  status,
-  link,
-}: CharactersCardProps) {
+export function CharactersCard({ personaje }: CharactersCardProps) {
+  const imageUrl = `https://cdn.thesimpsonsapi.com/500${personaje.portrait_path}`;
   return (
     <article className="rounded-lg flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden bg-white">
       <img
-        src={portrait_path}
-        alt={alt}
+        src={imageUrl}
+        alt={personaje.name}
         className={`h-60 w-full object-cover ${
-          status === "Alive" ? "" : "grayscale-100"
+          personaje.status === "Alive" ? "" : "grayscale-100"
         }`}
       />
       <div className="p-6 flex flex-col flex-1">
-        <h3 className="text-gray-900 text-lg font-bold">{name}</h3>
+        <h3 className="text-gray-900 text-lg font-bold">{personaje.name}</h3>
         <div className="grid grid-cols-2 mt-4 flex-1 items-center">
           <div className="flex flex-col gap-4 text-left text-gray-500 font-semibold text-sm flex-1">
             <p>F. Nacimiento:</p>
@@ -36,16 +25,18 @@ export function CharactersCard({
           </div>
           <div className="flex flex-col gap-4 text-right text-gray-900 font-semibold text-sm flex-1">
             <p>
-              {!birthdate ? (
+              {!personaje.birthdate ? (
                 <span className="bg-gray-200 text-gray-400 rounded-lg px-2">
                   Desconocida
                 </span>
               ) : (
-                <span className="bg-gray-200 rounded-lg px-2">{birthdate}</span>
+                <span className="bg-gray-200 rounded-lg px-2">
+                  {personaje.birthdate}
+                </span>
               )}
             </p>
             <p>
-              {gender === "Male" ? (
+              {personaje.gender === "Male" ? (
                 <span className="text-blue-700 bg-blue-200 rounded-lg px-2">
                   Masculino
                 </span>
@@ -56,20 +47,20 @@ export function CharactersCard({
               )}
             </p>
             <p>
-              {status === "Alive" ? (
+              {personaje.status === "Alive" ? (
                 <span className="text-green-700 bg-green-200 rounded-lg px-2">
-                  {gender === "Male" ? "Vivo" : "Viva"}
+                  {personaje.gender === "Male" ? "Vivo" : "Viva"}
                 </span>
               ) : (
                 <span className="text-red-500 bg-red-200 rounded-lg px-2">
-                  {gender === "Male" ? "Fallecido" : "Fallecida"}
+                  {personaje.gender === "Male" ? "Fallecido" : "Fallecida"}
                 </span>
               )}
             </p>
           </div>
         </div>
         <a
-          href={link}
+          href={`/characters/${personaje.id}`}
           className="bg-amber-200 flex cursor-pointer mt-6 font-semibold text-gray-500 hover:bg-amber-300 hover:text-gray-900 hover:font-bold transition-colors duration-200 items-center rounded-lg px-4 py-2 justify-center"
         >
           Ver detalles

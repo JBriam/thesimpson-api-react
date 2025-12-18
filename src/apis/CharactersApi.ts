@@ -1,9 +1,23 @@
 export const CharactersApi = {
-    fetchCharacters: async (page: number = 1) => {
-        const response = await fetch(`https://thesimpsonsapi.com/api/characters?page=${page}`);
-        if (!response.ok) {
-            throw new Error('Se ha producido un error al obtener los personajes');
-        }
-        return response.json();
+  fetchCharacters: async (page: number = 1) => {
+    const response = await fetch(
+      `https://thesimpsonsapi.com/api/characters?page=${page}`
+    );
+    if (!response.ok) {
+      throw new Error("Se ha producido un error al obtener los personajes");
     }
-}
+    return response.json();
+  },
+
+  fetchCharactersById: async (id: string) => {
+    const response = await fetch(
+      `https://thesimpsonsapi.com/api/characters/${id}`
+    );
+    if (!response.ok) {
+      throw new Error(
+        "Se ha producido un error al obtener información del personaje"
+      );
+    }
+    return response.json();
+  },
+};

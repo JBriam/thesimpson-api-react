@@ -1,23 +1,20 @@
+import { useEffect, useState } from "react";
 import { CharactersApi } from "@/apis/CharactersApi";
-import { CharactersCard } from "@/components/ui/CharactersCard";
 import { Title } from "@/components/ui/Title";
-import { useState, useEffect } from "react";
-import type { Character } from "@/interfaces/Character";
-import { Pagination } from "@/components/ui/Pagination";
+import type { CharacterDetail } from "@/interfaces/Character";
+import { CharacterDetailsCard } from "@/components/features/CharacterDetailsCard";
 
-export function Characters() {
-  const [personajes, setPersonajes] = useState<Character[]>([]);
+export function LocationDetails() {
+  const cod = window.location.pathname.split("/").pop();
+  const [personaje, setPersonaje] = useState<CharacterDetail | null>(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [paginaActual, setPaginaActual] = useState(1);
-  const [totalPaginas, setTotalPaginas] = useState(1);
 
   // Fetch characters data from the API
   useEffect(() => {
-    CharactersApi.fetchCharacters(paginaActual)
+    CharactersApi.fetchCharactersById(cod!)
       .then((data) => {
-        setPersonajes(data.results);
-        setTotalPaginas(data.pages);
+        setPersonaje(data);
         setCargando(false);
         // Hacer scroll hacia arriba cuando cambia la página
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -27,11 +24,7 @@ export function Characters() {
         setCargando(false);
         console.error(error);
       });
-  }, [paginaActual]);
-
-  const handlePageChange = (nuevaPagina: number) => {
-    setPaginaActual(nuevaPagina);
-  };
+  }, [cod]);
 
   if (cargando) {
     return (
@@ -69,30 +62,8 @@ export function Characters() {
         titulo="Personajes de Springfield"
         subtitulo="Explora el elenco completo de tu serie favorita"
       />
-      <Pagination
-        currentPage={paginaActual}
-        totalPages={totalPaginas}
-        onPageChange={handlePageChange}
-      />
-      <div className="grid grid-cols-4 gap-8">
-        {personajes.map((personaje) => (
-          <CharactersCard
-            key={personaje.id}
-            portrait_path={`https://cdn.thesimpsonsapi.com/500${personaje.portrait_path}`}
-            alt={personaje.name}
-            name={personaje.name}
-            birthdate={personaje.birthdate}
-            gender={personaje.gender}
-            status={personaje.status}
-            link={`/characters/${personaje.id}`}
-          />
-        ))}
-      </div>
-      <Pagination
-        currentPage={paginaActual}
-        totalPages={totalPaginas}
-        onPageChange={handlePageChange}
-      />
+      <div>Character Details Component</div>
+      {personaje && <CharacterDetailsCard />}
     </div>
   );
 }
