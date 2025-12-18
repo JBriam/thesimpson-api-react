@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { CharactersApi } from "@/apis/CharactersApi";
 import { Title } from "@/components/ui/Title";
 import type { CharacterDetail } from "@/interfaces/Character";
-import { CharacterDetailsCard } from "@/components/features/CharacterDetailsCard";
+import { EpisodeDetailsCard } from "@/components/features/EpisodeDetailsCard";
 
-export function EpisodeDetails() {
+export function CharacterDetails() {
   const cod = window.location.pathname.split("/").pop();
   const [personaje, setPersonaje] = useState<CharacterDetail | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -63,7 +63,7 @@ export function EpisodeDetails() {
         subtitulo="Explora el elenco completo de tu serie favorita"
       />
       <div>Character Details Component</div>
-      {personaje && <CharacterDetailsCard />}
+      {personaje && <EpisodeDetailsCard personaje={personaje} />}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CharactersApi } from "@/apis/CharactersApi";
 import { Title } from "@/components/ui/Title";
 import type { CharacterDetail } from "@/interfaces/Character";
-import { CharacterDetailsCard } from "@/components/features/CharacterDetailsCard";
+import { LocationDetailsCard } from "@/components/features/LocationDetailsCard";
 
 export function LocationDetails() {
   const cod = window.location.pathname.split("/").pop();
@@ -63,7 +63,7 @@ export function LocationDetails() {
         subtitulo="Explora el elenco completo de tu serie favorita"
       />
       <div>Character Details Component</div>
-      {personaje && <CharacterDetailsCard />}
+      {personaje && <LocationDetailsCard personaje={personaje} />}
     </div>
   );
 }
