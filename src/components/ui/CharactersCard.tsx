@@ -1,4 +1,5 @@
 import type { Character } from "@/interfaces/Character";
+import { Link } from "react-router-dom";
 
 interface CharactersCardProps {
   personaje: Character;
@@ -59,12 +60,12 @@ export function CharactersCard({ personaje }: CharactersCardProps) {
             </p>
           </div>
         </div>
-        <a
-          href={`/characters/${personaje.id}`}
+        <Link
+          to={`/characters/${personaje.id}`}
           className="bg-amber-300 flex cursor-pointer mt-6 font-bold text-gray-900 hover:bg-amber-200 hover:text-gray-500 hover:font-semibold transition-colors duration-200 items-center rounded-lg px-4 py-2 justify-center"
         >
           Ver detalles
-        </a>
+        </Link>
       </div>
     </article>
   );

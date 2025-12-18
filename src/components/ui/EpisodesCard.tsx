@@ -1,4 +1,5 @@
 import type { Episode } from "@/interfaces/Episode";
+import { Link } from "react-router-dom";
 
 interface EpisodesCardProps {
   episodio: Episode;
@@ -40,12 +41,12 @@ export function EpisodesCard({ episodio }: EpisodesCardProps) {
           </p>
         </div>
         <p className="text-gray-500 text-sm flex-1">{episodio.synopsis}</p>
-        <a
-          href={`/episodes/${episodio.id}`}
+        <Link
+          to={`/episodes/${episodio.id}`}
           className="bg-amber-200 flex cursor-pointer mt-6 font-semibold text-gray-500 hover:bg-amber-300 hover:text-gray-900 hover:font-bold transition-colors duration-200 items-center rounded-lg px-4 py-2 justify-center"
         >
           Ver detalles
-        </a>
+        </Link>
       </div>
     </article>
   );
