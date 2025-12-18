@@ -16,8 +16,8 @@ export interface CharacterDetail extends Character {
   description: string;
   first_appearance_ep_id: number;
   first_appearance_sh_id: number;
-  first_appearance_ep: Episode;
-  first_appearance_sh: Episode;
+  first_appearance_ep: Episode | null;
+  first_appearance_sh: Episode | null;
 }
 
 export interface FirstAppearance {

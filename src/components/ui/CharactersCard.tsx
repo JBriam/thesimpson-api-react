@@ -61,7 +61,7 @@ export function CharactersCard({ personaje }: CharactersCardProps) {
         </div>
         <a
           href={`/characters/${personaje.id}`}
-          className="bg-amber-200 flex cursor-pointer mt-6 font-semibold text-gray-500 hover:bg-amber-300 hover:text-gray-900 hover:font-bold transition-colors duration-200 items-center rounded-lg px-4 py-2 justify-center"
+          className="bg-amber-300 flex cursor-pointer mt-6 font-bold text-gray-900 hover:bg-amber-200 hover:text-gray-500 hover:font-semibold transition-colors duration-200 items-center rounded-lg px-4 py-2 justify-center"
         >
           Ver detalles
         </a>

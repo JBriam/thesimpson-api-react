@@ -6,4 +6,5 @@ export interface Episode extends Record<string, unknown> {
   name: string;
   season: number;
   synopsis: string;
+  description: string;
 }
