@@ -4,7 +4,7 @@ import { Title } from "@/components/ui/Title";
 import type { CharacterDetail } from "@/interfaces/Character";
 import { EpisodeDetailsCard } from "@/components/features/EpisodeDetailsCard";
 
-export function CharacterDetails() {
+export function EpisodeDetails() {
   const cod = window.location.pathname.split("/").pop();
   const [personaje, setPersonaje] = useState<CharacterDetail | null>(null);
   const [cargando, setCargando] = useState(true);
