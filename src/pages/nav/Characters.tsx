@@ -69,7 +69,7 @@ export function Characters() {
         titulo="Personajes de Springfield"
         subtitulo="Explora el elenco completo de tu serie favorita"
       />
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {personajes.map((personaje) => (
           <CharactersCard key={personaje.id} personaje={personaje} />
         ))}

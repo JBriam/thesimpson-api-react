@@ -43,11 +43,11 @@ export function Home() {
       </div>
 
       {/* Tarjeta del creador */}
-      <div className="bg-white mx-4 sm:mx-6 lg:mx-auto max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 shadow-lg rounded-lg overflow-hidden">
+      <div className="bg-white grid grid-cols-1 md:grid-cols-2 mx-4 sm:mx-6 lg:mx-auto max-w-4xl shadow-lg rounded-lg overflow-hidden">
         <img
           src="matt-groening-png.webp"
           alt="Creador de Los Simpson"
-          className="w-full h-64 md:h-auto object-contain p-6 md:p-12 bg-gray-400 border-amber-400 border-4 md:border-8"
+          className="w-full h-64 md:h-100 object-contain p-6 md:p-12 bg-gray-400 border-amber-400 border-4 md:border-8"
         />
         <div className="flex flex-col p-6 md:p-8 justify-center gap-3 md:gap-4">
           <h4 className="text-xs md:text-sm font-semibold text-yellow-400 flex items-center">

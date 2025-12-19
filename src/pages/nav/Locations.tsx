@@ -72,7 +72,7 @@ export function Locations() {
         totalPages={totalPaginas}
         onPageChange={handlePageChange}
       />
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
         {ubicaciones.map((ubicacion) => (
           <LocationsCard key={ubicacion.id} ubicacion={ubicacion} />
         ))}
