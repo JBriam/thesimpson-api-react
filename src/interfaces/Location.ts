@@ -5,3 +5,7 @@ export interface Location extends Record<string, unknown> {
   town: string;
   use: string;
 }
+
+export interface LocationDetail extends Location {
+  description: string;
+}

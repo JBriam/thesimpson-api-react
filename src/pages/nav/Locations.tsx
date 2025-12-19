@@ -12,7 +12,7 @@ export function Locations() {
   const [paginaActual, setPaginaActual] = useState(1);
   const [totalPaginas, setTotalPaginas] = useState(1);
 
-  // Fetch characters data from the API
+  // Fetch locations data from the API
   useEffect(() => {
     LocationsApi.fetchLocations(paginaActual)
       .then((data) => {
@@ -72,7 +72,7 @@ export function Locations() {
         totalPages={totalPaginas}
         onPageChange={handlePageChange}
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 items-start">
         {ubicaciones.map((ubicacion) => (
           <LocationsCard key={ubicacion.id} ubicacion={ubicacion} />
         ))}

@@ -68,11 +68,6 @@ export function Episodes() {
         titulo="Explora los Capítulos"
         subtitulo="Busca y descubre tus episodios favoritos de todas las temporadas. Desde los clásicos hasta los más recientes."
       />
-      <Pagination
-        currentPage={paginaActual}
-        totalPages={totalPaginas}
-        onPageChange={handlePageChange}
-      />
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
         {episodios.map((episodio) => (
           <EpisodesCard key={episodio.id} episodio={episodio} />

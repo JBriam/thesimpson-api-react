@@ -64,7 +64,7 @@ export function CharacterDetailsCard({ personaje }: CharacterDetailsCardProps) {
         {/* Columna Izquierda: Biografía y Frases */}
         <div className="col-span-2 flex flex-col gap-6">
           {/* Biografía */}
-          <div className="flex flex-col rounded-lg min-h-55">
+          <div className="flex flex-col rounded-lg min-h-55 bg-white">
             <h1 className="font-bold text-lg p-4 flex items-center bg-blue-900 rounded-t-lg text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ export function CharacterDetailsCard({ personaje }: CharacterDetailsCardProps) {
               </svg>
               Biografía
             </h1>
-            <p className="text-sm text-gray-700 mt-4">
+            <p className="text-sm text-gray-700 m-4">
               {personaje.description}
             </p>
           </div>
