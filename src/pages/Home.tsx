@@ -8,7 +8,7 @@ export function Home() {
       <img
         src="banner-simpson.jpeg"
         alt="Banner de Springfield"
-        className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
+        className="w-full h-35 sm:h-60 md:h-80 lg:h-90 object-cover"
       />
 
       {/* Contenido con ancho limitado */}
