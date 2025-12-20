@@ -8,10 +8,17 @@ import { Search } from "@/components/features/Search";
 
 export function Characters() {
   const [personajes, setPersonajes] = useState<Character[]>([]);
+  const [todosLosPersonajes, setTodosLosPersonajes] = useState<Character[]>([]);
   const [cargando, setCargando] = useState(true);
+  const [cargandoBusqueda, setCargandoBusqueda] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [paginaActual, setPaginaActual] = useState(1);
   const [totalPaginas, setTotalPaginas] = useState(1);
+
+  // Estados para los filtros de búsqueda
+  const [nombreFiltro, setNombreFiltro] = useState("");
+  const [generoFiltro, setGeneroFiltro] = useState("");
+  const [estadoFiltro, setEstadoFiltro] = useState("");
 
   // Fetch characters data from the API
   useEffect(() => {
@@ -30,11 +37,71 @@ export function Characters() {
       });
   }, [paginaActual]);
 
+  // Cargar todos los personajes cuando hay búsqueda por nombre
+  useEffect(() => {
+    const cargarTodosLosPersonajes = async () => {
+      if (nombreFiltro === "") {
+        return;
+      }
+      
+      setCargandoBusqueda(true);
+      try {
+        const primeraPagina = await CharactersApi.fetchCharacters(1);
+        const totalPags = primeraPagina.pages;
+        
+        // Cargar todas las páginas en paralelo
+        const promesas = [];
+        for (let i = 1; i <= totalPags; i++) {
+          promesas.push(CharactersApi.fetchCharacters(i));
+        }
+        
+        const resultados = await Promise.all(promesas);
+        const todosPersonajes = resultados.flatMap(r => r.results);
+        setTodosLosPersonajes(todosPersonajes);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Error desconocido');
+      } finally {
+        setCargandoBusqueda(false);
+      }
+    };
+    
+    cargarTodosLosPersonajes();
+  }, [nombreFiltro]);
+
   const handlePageChange = (nuevaPagina: number) => {
     setPaginaActual(nuevaPagina);
   };
 
-  if (cargando) {
+  // Función para resetear todos los filtros
+  const handleResetFiltros = () => {
+    setNombreFiltro("");
+    setGeneroFiltro("");
+    setEstadoFiltro("");
+  };
+
+  // Filtrar personajes según los criterios de búsqueda
+  // Si hay búsqueda por nombre, usar todos los personajes; si no, usar solo la página actual
+  const listaParaFiltrar = nombreFiltro !== "" && todosLosPersonajes.length > 0 
+    ? todosLosPersonajes 
+    : personajes;
+   
+  const personajesFiltrados = listaParaFiltrar.filter((personaje) => {
+    const cumpleNombre =
+      nombreFiltro === "" ||
+      personaje.name.toLowerCase().includes(nombreFiltro.toLowerCase());
+
+    const cumpleGenero =
+      generoFiltro === "" || personaje.gender === generoFiltro;
+
+    const cumpleEstado =
+      estadoFiltro === "" || personaje.status === estadoFiltro;
+
+    return cumpleNombre && cumpleGenero && cumpleEstado;
+  });
+
+  const estaCargando = cargando || cargandoBusqueda;
+
+  if (estaCargando && personajes.length === 0) {
     return (
       <div className="max-w-7xl mx-auto p-6 m-8">
         <Title
@@ -70,17 +137,40 @@ export function Characters() {
         titulo="Personajes de Springfield"
         subtitulo="Explora el elenco completo de tu serie favorita"
       />
-      <Search />
+      <Search
+        name={nombreFiltro}
+        gender={generoFiltro}
+        status={estadoFiltro}
+        onNameChange={setNombreFiltro}
+        onGenderChange={setGeneroFiltro}
+        onStatusChange={setEstadoFiltro}
+        onReset={handleResetFiltros}
+      />
+      {cargandoBusqueda && (
+        <div className="flex justify-center py-4">
+          <span className="w-8 h-8 rounded-[50%] inline-block border-t-[3px] border-solid border-transparent border-t-yellow-500 animate-spin"></span>
+          <span className="ml-3 text-gray-600">Buscando en todas las páginas...</span>
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {personajes.map((personaje) => (
+        {personajesFiltrados.map((personaje) => (
           <CharactersCard key={personaje.id} personaje={personaje} />
         ))}
       </div>
-      <Pagination
-        currentPage={paginaActual}
-        totalPages={totalPaginas}
-        onPageChange={handlePageChange}
-      />
+      {personajesFiltrados.length === 0 && (
+        <div className="text-center py-8">
+          <p className="text-xl text-gray-600">
+            No se encontraron personajes con esos filtros
+          </p>
+        </div>
+      )}
+      {nombreFiltro === "" && (
+        <Pagination
+          currentPage={paginaActual}
+          totalPages={totalPaginas}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }
