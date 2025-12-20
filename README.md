@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+## **Tecnologías Utilizadas**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### **Frontend**
+- **React 19.2.0** - Biblioteca principal de UI
+- **TypeScript** - Tipado estático para mayor robustez
+- **Vite** - Bundler moderno y rápido
+- **React Router Dom 7.10.1** - Navegación SPA
 
-Currently, two official plugins are available:
+### **UI/UX**
+- **Tailwind CSS 4.1.18** - Framework CSS "utility-first"
+- **Diseño responsive** adaptable a todos los dispositivos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### **Desarrollo**
+- **ESLint** - Linting y calidad de código
+- **TypeScript** - Tipado estático y mejor DX
+- **Vite HMR** - Hot Module Replacement para desarrollo ágil
 
-## React Compiler
+## **Instalación y Configuración**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### **Prerrequisitos**
+- **Node.js** >= 18.0.0
+- **npm** >= 8.0.0 (o **yarn** >= 1.22.0)
+- **Git** para clonación del repositorio
 
-## Expanding the ESLint configuration
+### **Pasos de Instalación**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/JBriam/thesimpson-api-react.git
+   cd thesimpson-api-react
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   # o si usas yarn
+   yarn install
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. **Ejecutar en modo desarrollo**
+   ```bash
+   npm run dev
+   # o si usas yarn
+   yarn dev
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. **Abrir en el navegador**
+   ```
+   http://localhost:5173
+   ```
