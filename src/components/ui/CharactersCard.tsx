@@ -12,11 +12,11 @@ export function CharactersCard({ personaje }: CharactersCardProps) {
       <img
         src={imageUrl}
         alt={personaje.name}
-        className={`h-60 w-full object-cover ${
+        className={`h-auto w-full p-4 object-cover ${
           personaje.status === "Alive" ? "" : "grayscale-100"
         }`}
       />
-      <div className="p-6 flex flex-col flex-1">
+      <div className="px-6 pb-6 flex flex-col flex-1">
         <h3 className="text-gray-900 text-lg font-bold">{personaje.name}</h3>
         <div className="grid grid-cols-2 mt-4 flex-1 items-center">
           <div className="flex flex-col gap-4 text-left text-gray-500 font-semibold text-sm flex-1">
