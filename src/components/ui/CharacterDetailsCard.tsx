@@ -16,22 +16,24 @@ export function CharacterDetailsCard({ personaje }: CharacterDetailsCardProps) {
 
   return (
     <article className="max-w-7xl mx-auto p-6 m-8">
-      <div className="flex items-center justify-center min-h-120 gap-8 bg-amber-300 relative rounded-2xl">
-        <img
-          src={imageUrl}
-          alt={personaje.name}
-          className="h-80 w-80 object-cover border-4 border-white rounded-full shadow-2xl bg-sky-300"
-        />
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-gray-900 font-bold text-6xl">
+      <div className="flex flex-col md:grid md:grid-cols-2 items-center justify-center min-h-120 gap-8 bg-amber-300 relative rounded-2xl p-6 md:p-8">
+        <div className="flex justify-center md:justify-end w-full">
+          <img
+            src={imageUrl}
+            alt={personaje.name}
+            className="h-56 w-56 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 object-cover border-4 border-white rounded-full shadow-2xl bg-sky-300"
+          />
+        </div>
+        <div className="flex flex-col gap-4 md:gap-6 text-center md:text-left w-full">
+          <div className="flex flex-col gap-1 md:gap-2">
+            <h1 className="text-gray-900 font-bold text-4xl sm:text-5xl md:text-6xl">
               {nombreSeparado[0]}
             </h1>
-            <h1 className="text-gray-900 font-bold text-6xl">
+            <h1 className="text-gray-900 font-bold text-4xl sm:text-5xl md:text-6xl">
               {nombreSeparado.slice(1).join(" ")}
             </h1>
           </div>
-          <p className="text-gray-600 font-medium flex items-center gap-2">
+          <p className="text-gray-600 font-medium flex items-center gap-2 justify-center md:justify-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -60,7 +62,7 @@ export function CharacterDetailsCard({ personaje }: CharacterDetailsCardProps) {
           ></path>
         </svg>
       </div>
-      <div className="grid grid-cols-3 mt-30 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-30 gap-6">
         {/* Columna Izquierda: Biografía y Frases */}
         <div className="col-span-2 flex flex-col gap-6">
           {/* Biografía */}
