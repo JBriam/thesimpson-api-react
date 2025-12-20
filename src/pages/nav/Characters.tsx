@@ -4,7 +4,8 @@ import { Title } from "@/components/features/Title";
 import { useState, useEffect } from "react";
 import type { Character } from "@/interfaces/Character";
 import { Pagination } from "@/components/features/Pagination";
-import { Search } from "@/components/features/Search";
+import { SearchText } from "@/components/features/SearchText";
+import { FilterCharacters } from "@/components/features/FilterCharacters";
 
 export function Characters() {
   const [personajes, setPersonajes] = useState<Character[]>([]);
@@ -43,28 +44,28 @@ export function Characters() {
       if (nombreFiltro === "") {
         return;
       }
-      
+
       setCargandoBusqueda(true);
       try {
         const primeraPagina = await CharactersApi.fetchCharacters(1);
         const totalPags = primeraPagina.pages;
-        
+
         // Cargar todas las páginas en paralelo
         const promesas = [];
         for (let i = 1; i <= totalPags; i++) {
           promesas.push(CharactersApi.fetchCharacters(i));
         }
-        
+
         const resultados = await Promise.all(promesas);
-        const todosPersonajes = resultados.flatMap(r => r.results);
+        const todosPersonajes = resultados.flatMap((r) => r.results);
         setTodosLosPersonajes(todosPersonajes);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error desconocido');
+        setError(err instanceof Error ? err.message : "Error desconocido");
       } finally {
         setCargandoBusqueda(false);
       }
     };
-    
+
     cargarTodosLosPersonajes();
   }, [nombreFiltro]);
 
@@ -81,10 +82,11 @@ export function Characters() {
 
   // Filtrar personajes según los criterios de búsqueda
   // Si hay búsqueda por nombre, usar todos los personajes; si no, usar solo la página actual
-  const listaParaFiltrar = nombreFiltro !== "" && todosLosPersonajes.length > 0 
-    ? todosLosPersonajes 
-    : personajes;
-   
+  const listaParaFiltrar =
+    nombreFiltro !== "" && todosLosPersonajes.length > 0
+      ? todosLosPersonajes
+      : personajes;
+
   const personajesFiltrados = listaParaFiltrar.filter((personaje) => {
     const cumpleNombre =
       nombreFiltro === "" ||
@@ -103,7 +105,7 @@ export function Characters() {
 
   if (estaCargando && personajes.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto p-6 m-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 my-4 sm:my-8">
         <Title
           titulo="Personajes de Springfield"
           subtitulo="Explora el elenco completo de tu serie favorita"
@@ -117,7 +119,7 @@ export function Characters() {
 
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto p-6 m-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 my-4 sm:my-8">
         <Title
           titulo="Personajes de Springfield"
           subtitulo="Explora el elenco completo de tu serie favorita"
@@ -132,24 +134,31 @@ export function Characters() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 m-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 my-4 sm:my-8">
       <Title
         titulo="Personajes de Springfield"
         subtitulo="Explora el elenco completo de tu serie favorita"
       />
-      <Search
-        name={nombreFiltro}
-        gender={generoFiltro}
-        status={estadoFiltro}
-        onNameChange={setNombreFiltro}
-        onGenderChange={setGeneroFiltro}
-        onStatusChange={setEstadoFiltro}
-        onReset={handleResetFiltros}
-      />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 bg-white p-3 sm:p-4 rounded-lg shadow-md mb-6 sm:mb-8 overflow-hidden">
+        <SearchText
+          name={nombreFiltro}
+          placeholder="Buscar personaje (ej. Homero, Lisa...)"
+          onNameChange={setNombreFiltro}
+        />
+        <FilterCharacters
+          gender={generoFiltro}
+          status={estadoFiltro}
+          onGenderChange={setGeneroFiltro}
+          onStatusChange={setEstadoFiltro}
+          onReset={handleResetFiltros}
+        />
+      </div>
       {cargandoBusqueda && (
         <div className="flex justify-center py-4">
           <span className="w-8 h-8 rounded-[50%] inline-block border-t-[3px] border-solid border-transparent border-t-yellow-500 animate-spin"></span>
-          <span className="ml-3 text-gray-600">Buscando en todas las páginas...</span>
+          <span className="ml-3 text-gray-600">
+            Buscando en todas las páginas...
+          </span>
         </div>
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
