@@ -1,5 +1,5 @@
 import { MenuCard } from "@/components/ui/MenuCard";
-import { Title } from "@/components/ui/Title";
+import { Title } from "@/components/features/Title";
 
 export function Home() {
   return (

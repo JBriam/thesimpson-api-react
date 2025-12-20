@@ -1,9 +1,9 @@
-import { Title } from "@/components/ui/Title";
+import { Title } from "@/components/features/Title";
 import { LocationsApi } from "@/apis/LocationsApi";
 import { LocationsCard } from "@/components/ui/LocationsCard";
 import type { Location } from "@/interfaces/Location";
 import { useState, useEffect } from "react";
-import { Pagination } from "@/components/ui/Pagination";
+import { Pagination } from "@/components/features/Pagination";
 
 export function Locations() {
   const [ubicaciones, setUbicaciones] = useState<Location[]>([]);
@@ -66,11 +66,6 @@ export function Locations() {
       <Title
         titulo="Explora los rincones de Springfield"
         subtitulo="Descubre dónde ocurren las historias de tus personajes favoritos."
-      />
-      <Pagination
-        currentPage={paginaActual}
-        totalPages={totalPaginas}
-        onPageChange={handlePageChange}
       />
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 items-start">
         {ubicaciones.map((ubicacion) => (

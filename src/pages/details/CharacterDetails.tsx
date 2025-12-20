@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CharactersApi } from "@/apis/CharactersApi";
 import type { CharacterDetail } from "@/interfaces/Character";
-import { CharacterDetailsCard } from "@/components/features/CharacterDetailsCard";
+import { CharacterDetailsCard } from "@/components/ui/CharacterDetailsCard";
 
 export function CharacterDetails() {
   const cod = window.location.pathname.split("/").pop();

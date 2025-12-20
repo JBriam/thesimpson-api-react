@@ -1,7 +1,7 @@
 import { EpisodesApi } from "@/apis/EpisodesApi";
 import { EpisodesCard } from "@/components/ui/EpisodesCard";
-import { Pagination } from "@/components/ui/Pagination";
-import { Title } from "@/components/ui/Title";
+import { Pagination } from "@/components/features/Pagination";
+import { Title } from "@/components/features/Title";
 import type { Episode } from "@/interfaces/Episode";
 import { useState, useEffect } from "react";
 

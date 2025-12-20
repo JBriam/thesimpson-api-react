@@ -1,9 +1,10 @@
 import { CharactersApi } from "@/apis/CharactersApi";
 import { CharactersCard } from "@/components/ui/CharactersCard";
-import { Title } from "@/components/ui/Title";
+import { Title } from "@/components/features/Title";
 import { useState, useEffect } from "react";
 import type { Character } from "@/interfaces/Character";
-import { Pagination } from "@/components/ui/Pagination";
+import { Pagination } from "@/components/features/Pagination";
+import { Search } from "@/components/features/Search";
 
 export function Characters() {
   const [personajes, setPersonajes] = useState<Character[]>([]);
@@ -69,6 +70,7 @@ export function Characters() {
         titulo="Personajes de Springfield"
         subtitulo="Explora el elenco completo de tu serie favorita"
       />
+      <Search />
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {personajes.map((personaje) => (
           <CharactersCard key={personaje.id} personaje={personaje} />
